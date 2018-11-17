@@ -7,4 +7,6 @@ public class StringConstants
     }
 
     public static final String APP_NAME = "2048";
+
+    public static final String FONT_NAME = "Clear Sans";
 }

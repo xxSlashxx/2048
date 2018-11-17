@@ -6,7 +6,7 @@ public class NumberConstants
     {
     }
 
-    public static final int APP_WINDOW_SIZE_WIDTH = 682;
+    public static final int APP_WINDOW_SIZE_WIDTH = 504;
 
-    public static final int APP_WINDOW_SIZE_HEIGHT = 705;
+    public static final int APP_WINDOW_SIZE_HEIGHT = 527;
 }

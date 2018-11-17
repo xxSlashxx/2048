@@ -1,5 +1,8 @@
 package de.slash._2048.view;
 
+import de.slash._2048.model.Cell;
+import de.slash._2048.model.GameBoard;
+import de.slash._2048.service.GameBoardService;
 import de.slash._2048.util.ColorConstants;
 import info.clearthought.layout.TableLayout;
 import net.miginfocom.swing.MigLayout;
@@ -8,9 +11,13 @@ import javax.swing.*;
 
 public class GameBoardPanel extends JPanel
 {
+    private GameBoardService gameBoardService;
+    private GameBoard gameBoard;
+
     public GameBoardPanel()
     {
         initializeClass();
+        initializeVariables();
         constructLayout();
         addComponents();
     }
@@ -21,11 +28,17 @@ public class GameBoardPanel extends JPanel
         setLayout(new MigLayout("", "[]15[]", "[]15[]"));
     }
 
+    private void initializeVariables()
+    {
+        gameBoardService = new GameBoardService();
+        gameBoard = gameBoardService.createGameBoard();
+    }
+
     private void constructLayout()
     {
         double size[][] = {
-                {15, 150, 15, 150, 15, 150, 15, 150, 15}, //Columns
-                {15, 150, 15, 150, 15, 150, 15, 150, 15} //Rows
+                {0, 14, 107, 14, 107, 14, 107, 14, 107, 14}, //Columns
+                {0, 14, 107, 14, 107, 14, 107, 14, 107, 14} //Rows
         };
 
         setLayout(new TableLayout(size));
@@ -33,24 +46,17 @@ public class GameBoardPanel extends JPanel
 
     private void addComponents()
     {
-        add(new CellPanel(), "1,1");
-        add(new CellPanel(), "3,1");
-        add(new CellPanel(), "5,1");
-        add(new CellPanel(), "7,1");
+        Cell[][] cells = gameBoard.getCells();
 
-        add(new CellPanel(), "1,3");
-        add(new CellPanel(), "3,3");
-        add(new CellPanel(), "5,3");
-        add(new CellPanel(), "7,3");
-
-        add(new CellPanel(), "1,5");
-        add(new CellPanel(), "3,5");
-        add(new CellPanel(), "5,5");
-        add(new CellPanel(), "7,5");
-
-        add(new CellPanel(), "1,7");
-        add(new CellPanel(), "3,7");
-        add(new CellPanel(), "5,7");
-        add(new CellPanel(), "7,7");
+        for (int row = 0; row < cells.length; row++)
+        {
+            for (int column = 0; column < cells[row].length; column++)
+            {
+                Cell cell = cells[row][column];
+                int columnInTable = (column + 1) * 2;
+                int rowInTable = (row + 1) * 2;
+                add(new CellPanel(cell), columnInTable + "," + rowInTable);
+            }
+        }
     }
 }

@@ -42,4 +42,10 @@ public class Cell
     {
         this.value = value;
     }
+
+    @Override
+    public String toString()
+    {
+        return row + ", " + column;
+    }
 }

@@ -4,6 +4,9 @@ public class GameBoard
 {
     private Cell[][] cells;
 
+    private int width;
+
+
     public GameBoard(Cell[][] cells)
     {
         this.cells = cells;
@@ -17,5 +20,10 @@ public class GameBoard
     public void setCells(Cell[][] cells)
     {
         this.cells = cells;
+    }
+
+    public int getWidth()
+    {
+        return cells != null ? cells.length : 0;
     }
 }

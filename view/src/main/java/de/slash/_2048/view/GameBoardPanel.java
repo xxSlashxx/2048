@@ -32,6 +32,7 @@ public class GameBoardPanel extends JPanel
     {
         gameBoardService = new GameBoardService();
         gameBoard = gameBoardService.createGameBoard();
+        gameBoardService.initializeGameBoard(gameBoard);
     }
 
     private void constructLayout()

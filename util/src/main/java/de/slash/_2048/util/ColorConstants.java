@@ -10,7 +10,9 @@ public class ColorConstants
 
     public final static Color GAME_BOARD_BACKGROUND = new Color(187, 173, 160);
 
-    public final static Color CELL_FONT_COLOR = new Color(249, 246, 242);
+    public final static Color CELL_FONT_COLOR_1 = new Color(249, 246, 242);
+
+    public final static Color CELL_FONT_COLOR_2 = new Color(119, 110, 101);
 
     public final static Color CELL_COLOR_DEFAULT = new Color(205, 192, 180);
 

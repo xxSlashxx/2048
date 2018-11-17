@@ -3,6 +3,9 @@ package de.slash._2048.service;
 import de.slash._2048.model.Cell;
 import de.slash._2048.model.GameBoard;
 
+import java.awt.*;
+import java.util.Random;
+
 public class GameBoardService
 {
     public GameBoard createGameBoard()
@@ -13,10 +16,30 @@ public class GameBoardService
         {
             for (int column = 0; column < cells[row].length; column++)
             {
-                cells[row][column] = new Cell(row, column, 16);
+                cells[row][column] = new Cell(row, column, null);
             }
         }
 
         return new GameBoard(cells);
+    }
+
+    public void initializeGameBoard(GameBoard gameBoard)
+    {
+        addNewValue(gameBoard);
+        addNewValue(gameBoard);
+    }
+
+    public void addNewValue(GameBoard gameBoard)
+    {
+        Point coordinate = generateRandomCoordinate(gameBoard);
+        gameBoard.getCells()[coordinate.y][coordinate.x].setValue(2);
+    }
+
+    private Point generateRandomCoordinate(GameBoard gameBoard)
+    {
+        Random random = new Random();
+        int row = random.nextInt(gameBoard.getWidth());
+        int column = random.nextInt(gameBoard.getWidth());
+        return new Point(column, row);
     }
 }

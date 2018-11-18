@@ -1,4 +1,4 @@
-### 2048
+### 2048 (Still in progress)
 
 Java clone of the famous game 2048.
 

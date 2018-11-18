@@ -41,6 +41,11 @@ public class CellPanel extends JPanel
         setCellValue(cell.getValue());
     }
 
+    public void refreshPanel()
+    {
+        setCellValue(cell.getValue());
+    }
+
     public void setCellValue(Integer value)
     {
         if (value != null)

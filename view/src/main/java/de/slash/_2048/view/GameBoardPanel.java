@@ -1,15 +1,18 @@
 package de.slash._2048.view;
 
 import de.slash._2048.model.Cell;
+import de.slash._2048.model.Direction;
 import de.slash._2048.model.GameBoard;
 import de.slash._2048.service.GameBoardService;
 import de.slash._2048.util.ColorConstants;
 import info.clearthought.layout.TableLayout;
-import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class GameBoardPanel extends JPanel
+public class GameBoardPanel extends JPanel implements KeyListener
 {
     private GameBoardService gameBoardService;
     private GameBoard gameBoard;
@@ -25,7 +28,8 @@ public class GameBoardPanel extends JPanel
     private void initializeClass()
     {
         setBackground(ColorConstants.GAME_BOARD_BACKGROUND);
-        setLayout(new MigLayout("", "[]15[]", "[]15[]"));
+        addKeyListener(this);
+        setFocusable(true);
     }
 
     private void initializeVariables()
@@ -59,5 +63,58 @@ public class GameBoardPanel extends JPanel
                 add(new CellPanel(cell), columnInTable + "," + rowInTable);
             }
         }
+    }
+
+
+    private void refreshComponents()
+    {
+        Component[] components = getComponents();
+
+        for(Component comp : components)
+        {
+            ((CellPanel)comp).refreshPanel();
+        }
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e)
+    {
+        // Nothing to do
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e)
+    {
+        Direction direction = null;
+
+        if (e.getKeyCode() == KeyEvent.VK_LEFT)
+        {
+            direction = Direction.LEFT;
+        }
+        else if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+        {
+            direction = Direction.RIGHT;
+        }
+        else if (e.getKeyCode() == KeyEvent.VK_UP)
+        {
+            direction = Direction.UP;
+        }
+        else if (e.getKeyCode() == KeyEvent.VK_DOWN)
+        {
+            direction = Direction.DOWN;
+        }
+
+        if (direction != null)
+        {
+            gameBoardService.moveValues(gameBoard, direction);
+            gameBoardService.addNewValue(gameBoard);
+            refreshComponents();
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e)
+    {
+        // Nothing to do
     }
 }

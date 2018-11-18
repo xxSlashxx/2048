@@ -1,6 +1,10 @@
+### 2048
+
 Java clone of the famous game 2048.
 
-Used Frameworks/Libraries:
-- Swing
-- TableLayout
-- JUnit
+#### Technologies used in the project
+
+* Swing
+* TableLayout
+* JUnit
+* Maven

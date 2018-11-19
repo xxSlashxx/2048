@@ -25,17 +25,37 @@ public class CellLabel extends JLabel
     {
         super.setText(text);
         setTextColor(text);
+        setTextFont(text);
     }
 
     private void setTextColor(String text)
     {
-        if (text == null || !(text.equals("2") || text.equals("4")))
+        if (text != null && (text.equals("2") || text.equals("4")))
+        {
+            setForeground(ColorConstants.CELL_FONT_COLOR_2);
+        }
+        else
         {
             setForeground(ColorConstants.CELL_FONT_COLOR_1);
         }
-        else if (text.equals("2") || text.equals("4"))
+    }
+
+    private void setTextFont(String text)
+    {
+        if (text != null)
         {
-            setForeground(ColorConstants.CELL_FONT_COLOR_2);
+            if (text.length() > 3)
+            {
+                setFont(new Font(StringConstants.FONT_NAME, Font.BOLD, 35));
+            }
+            else if (text.length() > 2)
+            {
+                setFont(new Font(StringConstants.FONT_NAME, Font.BOLD, 47));
+            }
+        }
+        else
+        {
+            setFont(new Font(StringConstants.FONT_NAME, Font.BOLD, 55));
         }
     }
 }

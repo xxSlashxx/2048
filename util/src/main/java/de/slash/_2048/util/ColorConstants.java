@@ -28,14 +28,13 @@ public class ColorConstants
 
     public final static Color CELL_COLOR_64 = new Color(246, 94, 59);
 
-    // TODO
-    public final static Color CELL_COLOR_128 = new Color(205, 192, 180);
+    public final static Color CELL_COLOR_128 = new Color(234, 204, 121);
 
-    public final static Color CELL_COLOR_256 = new Color(205, 192, 180);
+    public final static Color CELL_COLOR_256 = new Color(237, 204, 97);
 
-    public final static Color CELL_COLOR_512 = new Color(205, 192, 180);
+    public final static Color CELL_COLOR_512 = new Color(233, 197, 91);
 
-    public final static Color CELL_COLOR_1024 = new Color(205, 192, 180);
+    public final static Color CELL_COLOR_1024 = new Color(237, 197, 63);
 
-    public final static Color CELL_COLOR_2048 = new Color(205, 192, 180);
+    public final static Color CELL_COLOR_2048 = new Color(231, 190, 66);
 }

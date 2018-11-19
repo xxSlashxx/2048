@@ -101,7 +101,7 @@ public class GameBoardService
     public Cell[] moveAndMergeEqual(Cell[] cells, Direction direction)
     {
         List<Integer> notNullValues = getNotNullValuesFromCells(cells);
-        LinkedList<Integer> mergedValues = mergeValues(notNullValues);
+        LinkedList<Integer> mergedValues = mergeValues(notNullValues, direction);
         LinkedList<Integer> movedAndMergedValues = moveValuesInRowOrColumn(mergedValues, cells.length, direction);
 
         for (int i = 0; i < cells.length; i++)
@@ -127,23 +127,43 @@ public class GameBoardService
         return notNullValues;
     }
 
-    private LinkedList<Integer> mergeValues(List<Integer> values)
+    private LinkedList<Integer> mergeValues(List<Integer> values, Direction direction)
     {
         LinkedList<Integer> mergedValues = new LinkedList<>();
         Integer lastValue = null;
 
-        for (int i = 0; i < values.size(); i++)
+        if (direction == Direction.LEFT || direction == Direction.UP)
         {
-            if (values.get(i).equals(lastValue))
+            for (int i = 0; i < values.size(); i++)
             {
-                mergedValues.removeLast();
-                mergedValues.add(values.get(i) * 2);
-                lastValue = null;
+                if (values.get(i).equals(lastValue))
+                {
+                    mergedValues.removeLast();
+                    mergedValues.add(values.get(i) * 2);
+                    lastValue = null;
+                }
+                else
+                {
+                    mergedValues.addLast(values.get(i));
+                    lastValue = values.get(i);
+                }
             }
-            else
+        }
+        else if (direction == Direction.RIGHT || direction == Direction.DOWN)
+        {
+            for (int i = values.size() - 1; i > -1; i--)
             {
-                mergedValues.add(values.get(i));
-                lastValue = values.get(i);
+                if (values.get(i).equals(lastValue))
+                {
+                    mergedValues.removeFirst();
+                    mergedValues.addFirst(values.get(i) * 2);
+                    lastValue = null;
+                }
+                else
+                {
+                    mergedValues.addFirst(values.get(i));
+                    lastValue = values.get(i);
+                }
             }
         }
 

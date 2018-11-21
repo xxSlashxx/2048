@@ -4,7 +4,10 @@ import de.slash._2048.model.Cell;
 import de.slash._2048.model.Direction;
 import de.slash._2048.model.GameBoard;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
 
 public class GameBoardService
 {
@@ -60,6 +63,29 @@ public class GameBoardService
         }
 
         return freeCells;
+    }
+
+    public boolean hasWon(GameBoard gameBoard)
+    {
+        Cell[][] cells = gameBoard.getCells();
+
+        for (int row = 0; row < cells.length; row++)
+        {
+            for (int column = 0; column < cells[row].length; column++)
+            {
+                if (cells[row][column].getValue() != null && cells[row][column].getValue() == 2048)
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public boolean canMove(GameBoard gameBoard)
+    {
+        return !getFreeCells(gameBoard).isEmpty();
     }
 
     public void moveValues(GameBoard gameBoard, Direction direction)

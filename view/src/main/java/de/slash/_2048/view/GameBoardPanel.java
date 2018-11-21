@@ -70,9 +70,9 @@ public class GameBoardPanel extends JPanel implements KeyListener
     {
         Component[] components = getComponents();
 
-        for(Component comp : components)
+        for (Component comp : components)
         {
-            ((CellPanel)comp).refreshPanel();
+            ((CellPanel) comp).refreshPanel();
         }
     }
 
@@ -107,6 +107,7 @@ public class GameBoardPanel extends JPanel implements KeyListener
         if (direction != null)
         {
             gameBoardService.moveValues(gameBoard, direction);
+            checkGameBoard();
             gameBoardService.addNewValue(gameBoard);
             refreshComponents();
         }
@@ -116,5 +117,36 @@ public class GameBoardPanel extends JPanel implements KeyListener
     public void keyReleased(KeyEvent e)
     {
         // Nothing to do
+    }
+
+    private void checkGameBoard()
+    {
+        if (!gameBoardService.canMove(gameBoard))
+        {
+            int selectedOption = JOptionPane.showConfirmDialog(
+                    this,
+                    "TODO",
+                    "TODO",
+                    JOptionPane.YES_NO_OPTION);
+
+            if (selectedOption == JOptionPane.YES_OPTION)
+            {
+
+            }
+        }
+
+        if (gameBoardService.hasWon(gameBoard))
+        {
+            int selectedOption = JOptionPane.showConfirmDialog(
+                    this,
+                    "TODO",
+                    "TODO",
+                    JOptionPane.YES_NO_OPTION);
+
+            if (selectedOption == JOptionPane.YES_OPTION)
+            {
+
+            }
+        }
     }
 }

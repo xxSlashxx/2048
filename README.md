@@ -1,4 +1,4 @@
-### 2048 (Still in progress)
+# 2048 (Still in progress)
 
 [![Build Status](https://travis-ci.org/xxSlashxx/2048.svg?branch=master)](https://travis-ci.org/xxSlashxx/2048)
 [![Coverage Status](https://coveralls.io/repos/github/xxSlashxx/2048/badge.svg?branch=master)](https://coveralls.io/github/xxSlashxx/2048?branch=master)

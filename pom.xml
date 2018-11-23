@@ -15,12 +15,19 @@
         <module>util</module>
     </modules>
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    
     <build>
         <plugins>
             <plugin>
                 <groupId>org.eluder.coveralls</groupId>
                 <artifactId>coveralls-maven-plugin</artifactId>
                 <version>4.3.0</version>
+                <configuration>
+                    <repoToken>tsWP7f9nmlKvU4xjs8HzI7fZwJTsmjPja</repoToken>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>

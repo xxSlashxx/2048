@@ -41,12 +41,6 @@
         </dependency>
         <dependency>
             <groupId>de.slash.2048</groupId>
-            <artifactId>service</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>de.slash.2048</groupId>
             <artifactId>controller</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>

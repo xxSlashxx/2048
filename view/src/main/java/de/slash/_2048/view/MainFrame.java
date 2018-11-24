@@ -1,5 +1,6 @@
 package de.slash._2048.view;
 
+import de.slash._2048.util.ImageIconCreator;
 import de.slash._2048.util.NumberConstants;
 import de.slash._2048.util.StringConstants;
 
@@ -20,6 +21,7 @@ public class MainFrame extends JFrame
 
     private void initializeClass()
     {
+        setIconImage(ImageIconCreator.createImageIcon("/icon.png").getImage());
         setSize(NumberConstants.APP_WINDOW_SIZE_WIDTH, NumberConstants.APP_WINDOW_SIZE_HEIGHT);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);

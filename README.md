@@ -11,3 +11,5 @@ Java clone of the famous game 2048.
 * TableLayout
 * JUnit
 * Maven
+
+![](animation.gif)

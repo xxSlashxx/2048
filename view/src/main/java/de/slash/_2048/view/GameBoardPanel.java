@@ -1,42 +1,34 @@
 package de.slash._2048.view;
 
+import de.slash._2048.controller.GameBoardController;
 import de.slash._2048.model.Cell;
-import de.slash._2048.model.Direction;
-import de.slash._2048.model.GameBoard;
-import de.slash._2048.service.GameBoardService;
 import de.slash._2048.util.ColorConstants;
+import de.slash._2048.util.StringConstants;
 import info.clearthought.layout.TableLayout;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
-public class GameBoardPanel extends JPanel implements KeyListener
+public class GameBoardPanel extends JPanel implements PropertyChangeListener
 {
-    private GameBoardService gameBoardService;
-    private GameBoard gameBoard;
-
     public GameBoardPanel()
     {
         initializeClass();
-        initializeVariables();
         constructLayout();
-        addComponents();
+        addController();
     }
 
     private void initializeClass()
     {
         setBackground(ColorConstants.GAME_BOARD_BACKGROUND);
-        addKeyListener(this);
         setFocusable(true);
     }
 
-    private void initializeVariables()
+    private void addController()
     {
-        gameBoardService = new GameBoardService();
-        gameBoard = gameBoardService.createGameBoard();
-        gameBoardService.initializeGameBoard(gameBoard);
+        addKeyListener(new GameBoardController(this));
     }
 
     private void constructLayout()
@@ -49,10 +41,8 @@ public class GameBoardPanel extends JPanel implements KeyListener
         setLayout(new TableLayout(size));
     }
 
-    private void addComponents()
+    private void initComponents(Cell[][] cells)
     {
-        Cell[][] cells = gameBoard.getCells();
-
         for (int row = 0; row < cells.length; row++)
         {
             for (int column = 0; column < cells[row].length; column++)
@@ -65,7 +55,6 @@ public class GameBoardPanel extends JPanel implements KeyListener
         }
     }
 
-
     private void refreshComponents()
     {
         Component[] components = getComponents();
@@ -76,77 +65,54 @@ public class GameBoardPanel extends JPanel implements KeyListener
         }
     }
 
-    @Override
-    public void keyTyped(KeyEvent e)
+    private void showWonDialog()
     {
-        // Nothing to do
+        int selectedOption = JOptionPane.showConfirmDialog(
+                this,
+                "TODO",
+                "TODO",
+                JOptionPane.YES_NO_OPTION);
+
+        if (selectedOption == JOptionPane.YES_OPTION)
+        {
+
+        }
+    }
+
+    private void showLostDialog()
+    {
+        int selectedOption = JOptionPane.showConfirmDialog(
+                this,
+                "TODO",
+                "TODO",
+                JOptionPane.YES_NO_OPTION);
+
+        if (selectedOption == JOptionPane.YES_OPTION)
+        {
+
+        }
     }
 
     @Override
-    public void keyPressed(KeyEvent e)
+    public void propertyChange(PropertyChangeEvent propertyChangeEvent)
     {
-        Direction direction = null;
+        String eventPropertyname = propertyChangeEvent.getPropertyName();
 
-        if (e.getKeyCode() == KeyEvent.VK_LEFT)
+        if (eventPropertyname.equals(StringConstants.PROPERTY_CHANGE_EVENT_INIT))
         {
-            direction = Direction.LEFT;
+            initComponents((Cell[][]) propertyChangeEvent.getNewValue());
         }
-        else if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+        else if (eventPropertyname.equals(StringConstants.PROPERTY_CHANGE_EVENT_UPDATE))
         {
-            direction = Direction.RIGHT;
-        }
-        else if (e.getKeyCode() == KeyEvent.VK_UP)
-        {
-            direction = Direction.UP;
-        }
-        else if (e.getKeyCode() == KeyEvent.VK_DOWN)
-        {
-            direction = Direction.DOWN;
-        }
-
-        if (direction != null)
-        {
-            gameBoardService.moveValues(gameBoard, direction);
-            checkGameBoard();
-            gameBoardService.addNewValue(gameBoard);
             refreshComponents();
         }
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e)
-    {
-        // Nothing to do
-    }
-
-    private void checkGameBoard()
-    {
-        if (!gameBoardService.canMove(gameBoard))
+        else if (eventPropertyname.equals(StringConstants.PROPERTY_CHANGE_EVENT_WON))
         {
-            int selectedOption = JOptionPane.showConfirmDialog(
-                    this,
-                    "TODO",
-                    "TODO",
-                    JOptionPane.YES_NO_OPTION);
-
-            if (selectedOption == JOptionPane.YES_OPTION)
-            {
-
-            }
+            showWonDialog();
         }
-
-        if (gameBoardService.hasWon(gameBoard))
+        else if (eventPropertyname.equals(StringConstants.PROPERTY_CHANGE_EVENT_LOST))
         {
-            int selectedOption = JOptionPane.showConfirmDialog(
-                    this,
-                    "TODO",
-                    "TODO",
-                    JOptionPane.YES_NO_OPTION);
-
-            if (selectedOption == JOptionPane.YES_OPTION)
-            {
-
-            }
+            showLostDialog();
         }
     }
 }

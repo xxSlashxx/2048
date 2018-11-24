@@ -1,7 +1,5 @@
-package de.slash._2048.service;
+package de.slash._2048.model;
 
-import de.slash._2048.model.Cell;
-import de.slash._2048.model.Direction;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
@@ -107,8 +105,8 @@ class MergeTest
 
     private void testMerge(Cell[] input, Direction direction, Cell[] expected)
     {
-        GameBoardService service = new GameBoardService();
-        Cell[] result = service.moveAndMergeEqual(input, direction);
+        GameBoard gameBoard = new GameBoard();
+        Cell[] result = gameBoard.moveAndMergeEqual(input, direction);
         assertArrayEquals(expected, result);
     }
 }

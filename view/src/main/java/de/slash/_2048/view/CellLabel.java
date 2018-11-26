@@ -52,10 +52,10 @@ public class CellLabel extends JLabel
             {
                 setFont(new Font(StringConstants.FONT_NAME, Font.BOLD, 47));
             }
-        }
-        else
-        {
-            setFont(new Font(StringConstants.FONT_NAME, Font.BOLD, 55));
+            else
+            {
+                setFont(new Font(StringConstants.FONT_NAME, Font.BOLD, 55));
+            }
         }
     }
 }

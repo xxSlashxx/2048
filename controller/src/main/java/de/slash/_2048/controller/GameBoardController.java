@@ -26,24 +26,7 @@ public class GameBoardController implements KeyListener
     @Override
     public void keyPressed(KeyEvent e)
     {
-        Direction direction = null;
-
-        if (e.getKeyCode() == KeyEvent.VK_LEFT)
-        {
-            direction = Direction.LEFT;
-        }
-        else if (e.getKeyCode() == KeyEvent.VK_RIGHT)
-        {
-            direction = Direction.RIGHT;
-        }
-        else if (e.getKeyCode() == KeyEvent.VK_UP)
-        {
-            direction = Direction.UP;
-        }
-        else if (e.getKeyCode() == KeyEvent.VK_DOWN)
-        {
-            direction = Direction.DOWN;
-        }
+        Direction direction = resolveDirection(e);
 
         if (direction != null)
         {
@@ -56,5 +39,29 @@ public class GameBoardController implements KeyListener
     public void keyReleased(KeyEvent e)
     {
         // Nothing to do
+    }
+
+    private Direction resolveDirection(KeyEvent e)
+    {
+        if (e.getKeyCode() == KeyEvent.VK_LEFT)
+        {
+            return Direction.LEFT;
+        }
+        else if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+        {
+            return Direction.RIGHT;
+        }
+        else if (e.getKeyCode() == KeyEvent.VK_UP)
+        {
+            return Direction.UP;
+        }
+        else if (e.getKeyCode() == KeyEvent.VK_DOWN)
+        {
+            return Direction.DOWN;
+        }
+        else
+        {
+            return null;
+        }
     }
 }

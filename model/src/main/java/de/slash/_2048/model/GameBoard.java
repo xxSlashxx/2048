@@ -40,17 +40,11 @@ public class GameBoard
 
     public void firePropertyChange()
     {
-        if (!canMove())
-        {
-            propertyChangeSupport.firePropertyChange(StringConstants.PROPERTY_CHANGE_EVENT_LOST, null, cells);
-        }
-        else if (hasWon())
+        propertyChangeSupport.firePropertyChange(StringConstants.PROPERTY_CHANGE_EVENT_UPDATE, null, cells);
+
+        if (hasWon())
         {
             propertyChangeSupport.firePropertyChange(StringConstants.PROPERTY_CHANGE_EVENT_WON, null, cells);
-        }
-        else
-        {
-            propertyChangeSupport.firePropertyChange(StringConstants.PROPERTY_CHANGE_EVENT_UPDATE, null, cells);
         }
     }
 
@@ -75,9 +69,12 @@ public class GameBoard
 
     public void addNewValue()
     {
-        Cell freeCell = getRandomFreeCell();
-        freeCell.setValue(2);
-        firePropertyChange();
+        if (freeCellsExists())
+        {
+            Cell freeCell = getRandomFreeCell();
+            freeCell.setValue(2);
+            firePropertyChange();
+        }
     }
 
     private Cell getRandomFreeCell()
@@ -242,7 +239,7 @@ public class GameBoard
         return mergedValues;
     }
 
-    public boolean canMove()
+    public boolean freeCellsExists()
     {
         return !getFreeCells().isEmpty();
     }

@@ -10,103 +10,84 @@ class MergeTest
     @Test
     void testSample1()
     {
-        Cell[] input = {new Cell(1, 0, 2), new Cell(1, 1, 2), new Cell(1, 2, 4), new Cell(1, 3, null)};
-        Cell[] expected = {new Cell(1, 0, 4), new Cell(1, 1, 4), new Cell(1, 2, null), new Cell(1, 3, null)};
-        testMerge(input, Direction.LEFT, expected);
+        GameBoard inputGameBoard = createInputGameBoard();
+
+        Cell[][] expectedCells = {
+                {new Cell(0, 0, 4), new Cell(0, 1, null), new Cell(0, 2, null), new Cell(0, 3, null)},
+                {new Cell(1, 0, 4), new Cell(1, 1, null), new Cell(1, 2, null), new Cell(1, 3, null)},
+                {new Cell(2, 0, 4), new Cell(2, 1, 2), new Cell(2, 2, null), new Cell(2, 3, null)},
+                {new Cell(3, 0, 4), new Cell(3, 1, 4), new Cell(3, 2, null), new Cell(3, 3, null)}
+        };
+        GameBoard expectedGameBoard = new GameBoard(expectedCells);
+
+        testMerge(inputGameBoard, Direction.LEFT, expectedGameBoard);
     }
 
     @Test
     void testSample2()
     {
-        Cell[] input = {new Cell(1, 0, 2), new Cell(1, 1, null), new Cell(1, 2, null), new Cell(1, 3, null)};
-        Cell[] expected = {new Cell(1, 0, 2), new Cell(1, 1, null), new Cell(1, 2, null), new Cell(1, 3, null)};
-        testMerge(input, Direction.LEFT, expected);
+        GameBoard inputGameBoard = createInputGameBoard();
+
+        Cell[][] expectedCells = {
+                {new Cell(0, 0, null), new Cell(0, 1, null), new Cell(0, 2, null), new Cell(0, 3, 4)},
+                {new Cell(1, 0, null), new Cell(1, 1, null), new Cell(1, 2, null), new Cell(1, 3, 4)},
+                {new Cell(2, 0, null), new Cell(2, 1, null), new Cell(2, 2, 2), new Cell(2, 3, 4)},
+                {new Cell(3, 0, null), new Cell(3, 1, null), new Cell(3, 2, 4), new Cell(3, 3, 4)}
+        };
+        GameBoard expectedGameBoard = new GameBoard(expectedCells);
+
+        testMerge(inputGameBoard, Direction.RIGHT, expectedGameBoard);
     }
 
     @Test
     void testSample3()
     {
-        Cell[] input = {new Cell(1, 0, 4), new Cell(1, 1, null), new Cell(1, 2, 2), new Cell(1, 3, 2)};
-        Cell[] expected = {new Cell(1, 0, 4), new Cell(1, 1, 4), new Cell(1, 2, null), new Cell(1, 3, null)};
-        testMerge(input, Direction.LEFT, expected);
+        GameBoard inputGameBoard = createInputGameBoard();
+
+        Cell[][] expectedCells = {
+                {new Cell(0, 0, 4), new Cell(0, 1, 2), new Cell(0, 2, 4), new Cell(0, 3, 4)},
+                {new Cell(1, 0, 2), new Cell(1, 1, null), new Cell(1, 2, 2), new Cell(1, 3, null)},
+                {new Cell(2, 0, 4), new Cell(2, 1, null), new Cell(2, 2, null), new Cell(2, 3, null)},
+                {new Cell(3, 0, null), new Cell(3, 1, null), new Cell(3, 2, null), new Cell(3, 3, null)}
+        };
+        GameBoard expectedGameBoard = new GameBoard(expectedCells);
+
+        testMerge(inputGameBoard, Direction.UP, expectedGameBoard);
     }
 
     @Test
     void testSample4()
     {
-        Cell[] input = {new Cell(1, 0, 2), new Cell(1, 1, 2), new Cell(1, 2, null), new Cell(1, 3, 2)};
-        Cell[] expected = {new Cell(1, 0, 4), new Cell(1, 1, 2), new Cell(1, 2, null), new Cell(1, 3, null)};
-        testMerge(input, Direction.LEFT, expected);
+        GameBoard inputGameBoard = createInputGameBoard();
+
+        Cell[][] expectedCells = {
+                {new Cell(0, 0, null), new Cell(0, 1, null), new Cell(0, 2, null), new Cell(0, 3, null)},
+                {new Cell(1, 0, 2), new Cell(1, 1, null), new Cell(1, 2, null), new Cell(1, 3, null)},
+                {new Cell(2, 0, 4), new Cell(2, 1, null), new Cell(2, 2, 2), new Cell(2, 3, null)},
+                {new Cell(3, 0, 4), new Cell(3, 1, 2), new Cell(3, 2, 4), new Cell(3, 3, 4)}
+        };
+        GameBoard expectedGameBoard = new GameBoard(expectedCells);
+
+        testMerge(inputGameBoard, Direction.DOWN, expectedGameBoard);
     }
 
-    @Test
-    void testSample5()
+    private void testMerge(GameBoard inputGameBoard, Direction direction, GameBoard expectedGameBoard)
     {
-        Cell[] input = {new Cell(1, 0, 2), new Cell(1, 1, null), new Cell(1, 2, 2), new Cell(1, 3, 2)};
-        Cell[] expected = {new Cell(1, 0, 4), new Cell(1, 1, 2), new Cell(1, 2, null), new Cell(1, 3, null)};
-        testMerge(input, Direction.LEFT, expected);
-    }
-
-    @Test
-    void testSample6()
-    {
-        Cell[] input = {new Cell(1, 0, 2), new Cell(1, 1, 2), new Cell(1, 2, null), new Cell(1, 3, null)};
-        Cell[] expected = {new Cell(1, 0, null), new Cell(1, 1, null), new Cell(1, 2, null), new Cell(1, 3, 4)};
-        testMerge(input, Direction.RIGHT, expected);
-    }
-
-    @Test
-    void testSample7()
-    {
-        Cell[] input = {new Cell(1, 0, 4), new Cell(1, 1, 2), new Cell(1, 2, null), new Cell(1, 3, null)};
-        Cell[] expected = {new Cell(1, 0, null), new Cell(1, 1, null), new Cell(1, 2, 4), new Cell(1, 3, 2)};
-        testMerge(input, Direction.RIGHT, expected);
-    }
-
-    @Test
-    void testSample8()
-    {
-        Cell[] input = {new Cell(1, 0, 2), new Cell(1, 1, 2), new Cell(1, 2, 2), new Cell(1, 3, null)};
-        Cell[] expected = {new Cell(1, 0, 4), new Cell(1, 1, 2), new Cell(1, 2, null), new Cell(1, 3, null)};
-        testMerge(input, Direction.LEFT, expected);
-    }
-
-    @Test
-    void testSample9()
-    {
-        Cell[] input = {new Cell(1, 0, null), new Cell(1, 1, 2), new Cell(1, 2, 2), new Cell(1, 3, 2)};
-        Cell[] expected = {new Cell(1, 0, null), new Cell(1, 1, null), new Cell(1, 2, 2), new Cell(1, 3, 4)};
-        testMerge(input, Direction.RIGHT, expected);
-    }
-
-    @Test
-    void testSample10()
-    {
-        Cell[] input = {new Cell(1, 0, null), new Cell(1, 1, 2), new Cell(1, 2, 2), new Cell(1, 3, 2)};
-        Cell[] expected = {new Cell(1, 0, null), new Cell(1, 1, null), new Cell(1, 2, 2), new Cell(1, 3, 4)};
-        testMerge(input, Direction.DOWN, expected);
-    }
-
-    @Test
-    void testSample11()
-    {
-        Cell[] input = {new Cell(1, 0, 2), new Cell(1, 1, 2), new Cell(1, 2, 2), new Cell(1, 3, null)};
-        Cell[] expected = {new Cell(1, 0, 4), new Cell(1, 1, 2), new Cell(1, 2, null), new Cell(1, 3, null)};
-        testMerge(input, Direction.UP, expected);
-    }
-
-    @Test
-    void testSample12()
-    {
-        Cell[] input = {new Cell(1, 0, 2), new Cell(1, 1, null), new Cell(1, 2, 2), new Cell(1, 3, 8)};
-        Cell[] expected = {new Cell(1, 0, null), new Cell(1, 1, null), new Cell(1, 2, 4), new Cell(1, 3, 8)};
-        testMerge(input, Direction.DOWN, expected);
-    }
-
-    private void testMerge(Cell[] input, Direction direction, Cell[] expected)
-    {
-        GameBoard gameBoard = new GameBoard();
-        Cell[] result = gameBoard.moveAndMergeEqual(input, direction);
+        inputGameBoard.moveValues(direction);
+        Cell[][] result = inputGameBoard.getCells();
+        Cell[][] expected = expectedGameBoard.getCells();
         assertArrayEquals(expected, result);
+    }
+
+    private GameBoard createInputGameBoard()
+    {
+        Cell[][] inputCells = {
+                {new Cell(0, 0, 2), new Cell(0, 1, 2), new Cell(0, 2, null), new Cell(0, 3, null)},
+                {new Cell(1, 0, 2), new Cell(1, 1, null), new Cell(1, 2, 2), new Cell(1, 3, null)},
+                {new Cell(2, 0, 2), new Cell(2, 1, null), new Cell(2, 2, 2), new Cell(2, 3, 2)},
+                {new Cell(3, 0, 4), new Cell(3, 1, null), new Cell(3, 2, 2), new Cell(3, 3, 2)}
+        };
+
+        return new GameBoard(inputCells);
     }
 }

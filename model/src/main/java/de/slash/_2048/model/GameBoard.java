@@ -22,6 +22,12 @@ public class GameBoard
         initializeGameBoard();
     }
 
+    public GameBoard(Cell[][] customCells)
+    {
+        propertyChangeSupport = new SwingPropertyChangeSupport(this);
+        cells = customCells;
+    }
+
     public Cell[][] getCells()
     {
         return cells;
@@ -147,7 +153,7 @@ public class GameBoard
         return cells != null ? cells.length : 0;
     }
 
-    public Cell[] moveAndMergeEqual(Cell[] cells, Direction direction)
+    private Cell[] moveAndMergeEqual(Cell[] cells, Direction direction)
     {
         List<Integer> notNullValues = getNotNullValuesFromCells(cells);
         LinkedList<Integer> mergedValues = mergeValues(notNullValues, direction);

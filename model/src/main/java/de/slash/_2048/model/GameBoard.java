@@ -153,7 +153,7 @@ public class GameBoard
         return cells != null ? cells.length : 0;
     }
 
-    private Cell[] moveAndMergeEqual(Cell[] cells, Direction direction)
+    private void moveAndMergeEqual(Cell[] cells, Direction direction)
     {
         List<Integer> notNullValues = getNotNullValuesFromCells(cells);
         LinkedList<Integer> mergedValues = mergeValues(notNullValues, direction);
@@ -163,8 +163,6 @@ public class GameBoard
         {
             cells[i].setValue(movedAndMergedValues.get(i));
         }
-
-        return cells;
     }
 
     private List<Integer> getNotNullValuesFromCells(Cell[] cells)

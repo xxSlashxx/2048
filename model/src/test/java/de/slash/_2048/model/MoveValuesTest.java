@@ -5,10 +5,10 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 
-class MergeTest
+class MoveValuesTest
 {
     @Test
-    void testSample1()
+    void testMoveLeft()
     {
         GameBoard inputGameBoard = createInputGameBoard();
 
@@ -24,7 +24,7 @@ class MergeTest
     }
 
     @Test
-    void testSample2()
+    void testMoveRight()
     {
         GameBoard inputGameBoard = createInputGameBoard();
 
@@ -40,7 +40,7 @@ class MergeTest
     }
 
     @Test
-    void testSample3()
+    void testMoveUp()
     {
         GameBoard inputGameBoard = createInputGameBoard();
 
@@ -56,7 +56,7 @@ class MergeTest
     }
 
     @Test
-    void testSample4()
+    void testMoveDown()
     {
         GameBoard inputGameBoard = createInputGameBoard();
 
